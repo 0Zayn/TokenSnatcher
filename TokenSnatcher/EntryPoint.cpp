@@ -60,7 +60,7 @@ int main() {
             std::string Section(Content.substr(Pos, End - Pos));
             std::smatch Match;
 
-            if (std::regex_search(Section, Match, TokenPattern) && UniqueTokens.insert(Match[0]).second)
+            if (std::regex_search(Section, Match, TokenPattern) && UniqueTokens.insert(Match[0]).second) // Only get tokens that are different, incase the user logs into a new account, or there are multiple of the same token found in the memory
                 std::cout << Match[0] << '\n';
 
             Pos += 13;
