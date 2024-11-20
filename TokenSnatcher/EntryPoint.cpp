@@ -45,7 +45,7 @@ int main() {
         if (!VirtualQueryEx(ProcessHandle, CurrentAddr, &Mbi, sizeof(Mbi))) break;
 
         CurrentAddr += Mbi.RegionSize;
-        if (Mbi.State != MEM_COMMIT || Mbi.Protect != PAGE_READWRITE) continue;
+        if (Mbi.State != MEM_COMMIT || Mbi.Protect != PAGE_READWRITE) continue; // The details of the request sent is located inside a page with read/write protections, so this should narrow it down
 
         const size_t ReadSize = std::min<size_t>(Mbi.RegionSize, Buffer.size());
         if (!ReadProcessMemory(ProcessHandle, Mbi.BaseAddress, Buffer.data(), ReadSize, nullptr)) continue;
