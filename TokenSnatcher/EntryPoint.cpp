@@ -53,7 +53,7 @@ int main() {
         std::string_view Content(reinterpret_cast<char*>(Buffer.data()), ReadSize);
         size_t Pos = 0;
 
-        while ((Pos = Content.find("Authorization", Pos)) != std::string_view::npos) {
+        while ((Pos = Content.find("Authorization", Pos)) != std::string_view::npos) { // Finds the string between "Authorization", and "User-Agent" which will hold the token, since in the request the token is under the "Authorization" header
             auto End = Content.find("User-Agent", Pos);
             if (End == std::string_view::npos) { Pos++; continue; }
 
